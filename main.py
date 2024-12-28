@@ -84,6 +84,10 @@ def emulated_shell(channel, client_ip, username="root"):
                 break
             elif command == b'pwd':
                 response = f"\n/home/{username}\r\n".encode()
+            elif command == b'echo $SHELL':
+                response = f"\n/bin/bash\r\n".encode()
+            elif command == b'which $SHELL':
+                response = f"\n/bin/bash\r\n".encode()
             elif command == b'whoami':
                 response = f"\n{username}\r\n".encode()
             elif command == b'ls':
