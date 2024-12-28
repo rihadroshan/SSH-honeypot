@@ -71,7 +71,7 @@ python3 main.py -a 0.0.0.0 -p 2222
 
 Usage with Custom Authentication:
 ```sh
-python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -w pass
+python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -d pass
 ```
 
 ---
