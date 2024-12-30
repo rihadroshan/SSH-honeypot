@@ -5,21 +5,18 @@ import threading
 import socket
 import argparse
 
-# Set up logging 
 logging.basicConfig(filename='ssh_sys.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 server_key = paramiko.RSAKey(filename='server.key')
 
 SSH_BANNER = "SSH-2.0-SSHServer_1.0"
 
-# Funnel Logger for capturing command execution
 funnel_logger = logging.getLogger('FunnelLogger')
 funnel_logger.setLevel(logging.INFO)
 funnel_handler = RotatingFileHandler('command_log.log', maxBytes=2000, backupCount=5)
 funnel_handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
 funnel_logger.addHandler(funnel_handler)
 
-# Credentials Logger for capturing attempted logins
 creds_logger = logging.getLogger('CredsLogger')
 creds_logger.setLevel(logging.INFO)
 creds_handler = RotatingFileHandler('auth.log', maxBytes=2000, backupCount=5)
