@@ -63,14 +63,29 @@ class SSHServer(paramiko.ServerInterface):
 def emulated_shell(channel, client_ip, username="root"):
     channel.send(f"{username}@webcorp:/home/{username}# ".encode())
     command = b""
+        current_line = b""
+    cursor_position = 0
+    
     while True:
         char = channel.recv(1)
         if not char:
             channel.close()
             break
 
+        if char in (b'\x7f', b'\x08'):
+            if cursor_position > 0:
+                # Remove last character from current line
+                current_line = current_line[:-1]
+                command = command[:-1]
+                cursor_position -= 1
+                # Send backspace sequence: backspace, space, backspace
+                channel.send(b'\x08 \x08')
+            continue
+
         channel.send(char)
+        current_line += char
         command += char
+        cursor_position += 1
 
         if char == b"\r":
             command = command.strip()
@@ -116,6 +131,8 @@ def emulated_shell(channel, client_ip, username="root"):
             channel.send(response)
             channel.send(f"{username}@webcorp:/home/{username}# ".encode())
             command = b""
+            current_line = b""
+            cursor_position = 0
 
 def client_handle(client, addr, username, password):
     client_ip = addr[0]
