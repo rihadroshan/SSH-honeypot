@@ -63,7 +63,7 @@ class SSHServer(paramiko.ServerInterface):
 def emulated_shell(channel, client_ip, username="root"):
     channel.send(f"{username}@webcorp:/home/{username}# ".encode())
     command = b""
-        current_line = b""
+    current_line = b""
     cursor_position = 0
     
     while True:
