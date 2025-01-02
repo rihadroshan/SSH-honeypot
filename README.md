@@ -64,9 +64,10 @@ The honeypot logs activities in three files:
 
 This project is licensed under the MIT License. See the `LICENSE.md` file for details.
 
-## Contributing
+## Contributions & Reporting Issues:
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions of new features, improvements, or bug fixes are always welcome!
+Feel free to open a pull request or open an issue.
 
 ## Disclaimer
 
