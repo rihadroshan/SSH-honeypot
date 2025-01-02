@@ -1,6 +1,4 @@
-<div align="center"> 
-
-<img src="/images/sshhoneypot-logo.png" alt="fabriclogo" width="400" height="400"/>
+<div align="center">
 
 # `ssh honeypot`
 
@@ -29,24 +27,8 @@ This project is an SSH honeypot implemented in Python. The honeypot logs authent
 ```sh
 git clone https://github.com/rihadroshan/ssh-honeypot.git
 cd ssh-honeypot
-```
-
-2. Generate a host key for the SSH server if you don't have one:
-
-```sh
-ssh-keygen -t rsa -f server.key
-```
-
-## Usage
-
-Run the honeypot server with the following command:
-
-### Basic Usage
-
-```sh
 python3 main.py -a <address> -p <port>
 ```
-
 By default, the honeypot will use the username `root`.
 
 ### Usage with Custom Authentication
@@ -67,14 +49,14 @@ python3 main.py -a <address> -p <port> -u <username> -w <password>
 Basic Usage:
 ```sh
 python3 main.py -a 0.0.0.0 -p 2222
+sudo python3 main.py -a 0.0.0.0 -p 22
 ```
 
 Usage with Custom Authentication:
+
 ```sh
 python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd
 ```
-
----
 
 ## Logs
 
