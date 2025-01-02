@@ -14,7 +14,7 @@ This project is an SSH honeypot implemented in Python. The honeypot logs authent
 - Logs executed commands.
 - Provides customizable username and password for authentication.
 
-### Usage 
+### Basic Usage 
 
 By default, the honeypot will use the username `root`; no password is required.
 
