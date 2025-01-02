@@ -76,7 +76,5 @@ This tool is intended for educational and research purposes only. Use it respons
 ## Files in the Repository
 
 - **`main.py`**: The main Python script for the SSH honeypot.
-- **`images`**: A directory containing images used in the README.md file.
 - **`README.md`**: This readme file providing an overview and usage instructions.
-- **`.gitignore`**: To exclude unnecessary files such as `__pycache__` and other temporary files.
 - **`LICENSE`**:  The license file (`LICENSE`) contains the legal terms under which the SSH honeypot project is distributed and used.
