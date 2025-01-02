@@ -14,12 +14,6 @@ This project is an SSH honeypot implemented in Python. The honeypot logs authent
 - Logs executed commands.
 - Provides customizable username and password for authentication.
 
-## Installation
-
-### Prerequisites
-
-- Python 3.x
-
 ### Setup
 
 1. Clone the repository:
