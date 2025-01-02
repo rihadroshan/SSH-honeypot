@@ -14,20 +14,19 @@ This project is an SSH honeypot implemented in Python. The honeypot logs authent
 - Logs executed commands.
 - Provides customizable username and password for authentication.
 
-### Usage with Custom Authentication
+### Usage 
 
 By default, the honeypot will use the username `root`; no password is required.
 
 ```sh
-python3 main.py -a <address> -p <port> -u <username> -w <password>
+python3 main.py -a <address> -p <port>
 ```
 
-### Arguments
+### Usage with Custom Authentication
 
-* `-a`, `--address`: IP address.
-* `-p`, `--port`: Port number.
-* `-u`, `--username`: (Optional) Username for authentication.
-* `-d`, `--password`: (Optional) Password for authentication.
+```sh
+python3 main.py -a <address> -p <port> -u <username> -w <password>
+```
 
 ### Examples
 
@@ -40,9 +39,16 @@ sudo python3 main.py -a 0.0.0.0 -p 22
 Usage with Custom Authentication:
 
 ```sh
-python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -d passed
-sudo python3 main.py -a 0.0.0.0 -p 22 -u ubuntu -d passwd
+python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd 
+sudo python3 main.py -a 0.0.0.0 -p 22 -u ubuntu -d passwd 
 ```
+
+### Arguments
+
+* `-a`, `--address`: IP address.
+* `-p`, `--port`: Port number.
+* `-u`, `--username`: (Optional) Username for authentication.
+* `-d`, `--password`: (Optional) Password for authentication.
 
 ## Logs
 
