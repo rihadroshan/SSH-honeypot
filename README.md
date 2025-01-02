@@ -33,13 +33,15 @@ python3 main.py -a <IP address> -p <port> -u <username> -w <password>
 Basic Usage:
 ```sh
 python3 main.py -a 0.0.0.0 -p 2222
+
 sudo python3 main.py -a 0.0.0.0 -p 22
 ```
 
 Usage with Custom Authentication:
 
 ```sh
-python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd 
+python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd
+
 sudo python3 main.py -a 0.0.0.0 -p 22 -u ubuntu -d passwd 
 ```
 
