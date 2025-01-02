@@ -19,13 +19,13 @@ This project is an SSH honeypot implemented in Python. The honeypot logs authent
 By default, the honeypot will use the username `root`; no password is required.
 
 ```sh
-python3 main.py -a <address> -p <port>
+python3 main.py -a <IP address> -p <port>
 ```
 
 ### Usage with Custom Authentication
 
 ```sh
-python3 main.py -a <address> -p <port> -u <username> -w <password>
+python3 main.py -a <IP address> -p <port> -u <username> -w <password>
 ```
 
 ### Examples
