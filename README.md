@@ -67,6 +67,7 @@ This project is licensed under the MIT License. See the `LICENSE.md` file for de
 ## Contributions & Reporting Issues:
 
 Contributions of new features, improvements, or bug fixes are always welcome!
+
 Feel free to open a pull request or open an issue.
 
 ## Disclaimer
