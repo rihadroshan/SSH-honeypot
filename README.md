@@ -14,18 +14,9 @@ This project is an SSH honeypot implemented in Python. The honeypot logs authent
 - Logs executed commands.
 - Provides customizable username and password for authentication.
 
-### Setup
-
-1. Clone the repository:
-
-```sh
-git clone https://github.com/rihadroshan/ssh-honeypot.git
-cd ssh-honeypot
-python3 main.py -a <address> -p <port>
-```
-By default, the honeypot will use the username `root`.
-
 ### Usage with Custom Authentication
+
+By default, the honeypot will use the username `root`.
 
 ```sh
 python3 main.py -a <address> -p <port> -u <username> -w <password>
