@@ -39,16 +39,16 @@ class SSHServer(paramiko.ServerInterface):
 
     def check_auth_password(self, username, password):
         creds_logger.info(f'Authentication attempt: IP={self.client_ip}, username={username}, password={password}')
-    
-        if self.input_username and self.input_password:
-            if username == self.input_username and password == self.input_password:
-                funnel_logger.info(f"Authentication successful for IP={self.client_ip}, username={username}")
-                return paramiko.AUTH_SUCCESSFUL
-            else:
-                funnel_logger.warning(f"Authentication failed for IP={self.client_ip}, username={username}")
-                return paramiko.AUTH_FAILED
+
+        if self.input_username is None and self.input_password is None:
+            funnel_logger.info(f"Default login successful for IP={self.client_ip}, username={username}")
+            return paramiko.AUTH_SUCCESSFUL
+
+        if username == self.input_username and password == self.input_password:
+            funnel_logger.info(f"Authentication successful for IP={self.client_ip}, username={username}")
+            return paramiko.AUTH_SUCCESSFUL
         else:
-            funnel_logger.error("Server not properly configured with username and password.")
+            funnel_logger.warning(f"Authentication failed for IP={self.client_ip}, username={username}")
             return paramiko.AUTH_FAILED
 
     def check_channel_shell_request(self, channel):
