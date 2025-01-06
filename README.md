@@ -1,9 +1,3 @@
-<div align="center">
-
-# `ssh honeypot`
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/rihadroshan/ssh-honeypot/blob/main/LICENSE)
-
 This project is an SSH honeypot implemented in Python. The honeypot logs authentication attempts and command executions, providing insights into potential malicious activities.
 </div>
 
