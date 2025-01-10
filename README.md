@@ -1,4 +1,4 @@
-This project is an SSH honeypot implemented in Python. The honeypot logs authentication attempts and command executions, providing insights into potential malicious activities.
+This project is an SSH honeypot. This honeypot logs authentication attempts and command executions, providing insights into potential malicious activities.
 </div>
 
 ## Features
