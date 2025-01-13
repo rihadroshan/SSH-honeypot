@@ -1,5 +1,4 @@
 This ssh honeypot logs authentication attempts and command executions, providing insights into potential malicious activities.
-</div>
 
 ## Features
 
