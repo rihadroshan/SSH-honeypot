@@ -12,30 +12,30 @@ This ssh honeypot logs authentication attempts and command executions, providing
 By default, the honeypot will use the username `root`; no password is required.
 
 ```sh
-python3 main.py -a <IP address> -p <port>
+python3 server.py -a <IP address> -p <port>
 ```
 
 ### Usage with Custom Authentication
 
 ```sh
-python3 main.py -a <IP address> -p <port> -u <username> -w <password>
+python3 server.py -a <IP address> -p <port> -u <username> -w <password>
 ```
 
 ### Examples
 
 Basic Usage:
 ```sh
-python3 main.py -a 0.0.0.0 -p 2222
+python3 server.py -a 0.0.0.0 -p 2222
 
-sudo python3 main.py -a 0.0.0.0 -p 22
+sudo python3 server.py -a 0.0.0.0 -p 22
 ```
 
 Usage with Custom Authentication:
 
 ```sh
-python3 main.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd
+python3 server.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd
 
-sudo python3 main.py -a 0.0.0.0 -p 22 -u ubuntu -d passwd 
+sudo python3 server.py -a 0.0.0.0 -p 22 -u ubuntu -d passwd 
 ```
 
 ### Arguments
@@ -69,6 +69,6 @@ This tool is intended for educational and research purposes only. Use it respons
 
 ## Files in the Repository
 
-- **`main.py`**: The main Python script for the SSH honeypot.
+- **`server.py`**: The main Python script for the SSH honeypot.
 - **`README.md`**: This readme file providing an overview and usage instructions.
 - **`LICENSE`**:  The license file (`LICENSE`) contains the legal terms under which the SSH honeypot project is distributed and used.
