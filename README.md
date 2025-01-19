@@ -1,6 +1,6 @@
 ## Features
 
-- Logs SSH connection attempts, including usernames and passwords.
+- Log SSH connection attempts, including usernames and passwords.
 - Simulates an interactive shell environment.
 - Logs executed commands.
 - Provides customizable username and password for authentication.
