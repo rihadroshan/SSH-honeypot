@@ -31,9 +31,9 @@ sudo python3 server.py -a 0.0.0.0 -p 22
 Usage with Custom Authentication:
 
 ```sh
-python3 server.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd
+python3 server.py -a 0.0.0.0 -p 2222 -u ubuntu -d pass
 
-sudo python3 server.py -a 0.0.0.0 -p 22 -u ubuntu -d passwd 
+sudo python3 server.py -a 0.0.0.0 -p 22 -u ubuntu -d pass 
 ```
 
 ### Arguments
