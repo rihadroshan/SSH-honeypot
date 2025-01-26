@@ -5,52 +5,66 @@
 - **Command logging**: Logs all commands executed by the attacker.
 - **Customizable authentication**: Allows setting a custom username and password for authentication.
 - **Rotating log files**: Logs are stored in rotating files to prevent excessive disk usage.
+## Basic Usage
 
-### Basic Usage 
-
-By default, the honeypot will use the username `root`; no password is required.
+By default, the honeypot will use the username `root`, no password, and bind to the machine's default IP address.
 
 ```bash
-python3 server.py -a <IP address> -p <port>
+python3 server.py -p <port>
+```
+
+---
+
+## Usage with Custom Authentication
+
+You can specify a custom username and password for authentication. The `-a` (or `--address`) argument is optional and defaults to the machine's IP address if not provided.
+
+```bash
+python3 server.py -p <port> -u <username> -d <password>
+```
+
+To bind to a specific IP address, use the `-a` argument:
+
+```bash
+python3 server.py -a <IP address> -p <port> -u <username> -d <password>
+```
+
+---
+
+## Examples
+
+### Basic Usage
+```bash
+python3 server.py -p 2222
+
+sudo python3 server.py -p 22
 ```
 
 ### Usage with Custom Authentication
+```bash
+python3 server.py -p 2222 -u ubuntu -d pass
 
-```sh
-python3 server.py -a <IP address> -p <port> -u <username> -w <password>
+sudo python3 server.py -p 22 -u ubuntu -d pass
 ```
 
-### Examples
+### Binding to a Specific IP Address
+```bash
+python3 server.py -a 192.168.1.100 -p 2222
 
-Basic Usage:
-```sh
-python3 server.py -a 0.0.0.0 -p 2222
-
-sudo python3 server.py -a 0.0.0.0 -p 22
+sudo python3 server.py -a 192.168.1.100 -p 22 -u ubuntu -d pass
 ```
-
-Usage with Custom Authentication:
-
-```sh
-python3 server.py -a 0.0.0.0 -p 2222 -u ubuntu -d pass
-
-sudo python3 server.py -a 0.0.0.0 -p 22 -u ubuntu -d pass 
-```
-
-### Arguments
-
-* `-a`, `--address`: IP address.
-* `-p`, `--port`: Port number.
-* `-u`, `--username`: (Optional) Username for authentication.
-* `-d`, `--password`: (Optional) Password for authentication.
+---
 
 ## Logs
 
-The honeypot logs activities in three files:
+The honeypot logs activities in three rotating log files:
 
-- `ssh_sys.log`: General log file for server activities.
-- `command_log.log`: Log file for executed commands.
-- `auth.log`: Log file for authentication attempts.
+1. **`ssh_sys.log`**: General log file for server activities.
+2. **`command_log.log`**: Logs all commands executed by the attacker.
+3. **`auth.log`**: Logs authentication attempts, including usernames and passwords.
+
+Log files are rotated when they reach 2000 bytes, with up to 5 backup files retained.
+
 
 ## License
 
@@ -64,7 +78,7 @@ Feel free to open a pull request or open an issue.
 
 ## Disclaimer
 
-This tool is intended for educational and research purposes only. Use it responsibly and only on networks you own or have permission to test.
+This tool is intended for educational and research purposes only. Use it responsibly and only on networks you own or have permission to test. The authors are not responsible for any misuse or damage caused by this tool.
 
 ## Files in the Repository
 
