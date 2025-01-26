@@ -6,8 +6,6 @@
 - **Customizable authentication**: Allows setting a custom username and password for authentication.
 - **Rotating log files**: Logs are stored in rotating files to prevent excessive disk usage.
 
----
-
 ### Basic Usage 
 
 By default, the honeypot will use the username `root`; no password is required.
