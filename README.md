@@ -9,7 +9,7 @@
 
 By default, the honeypot will use the username `root`; no password is required.
 
-```sh
+```bash
 python3 server.py -a <IP address> -p <port>
 ```
 
