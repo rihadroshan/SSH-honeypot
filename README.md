@@ -1,17 +1,16 @@
-This ssh honeypot logs authentication attempts and command executions, providing insights into potential malicious activities.
-
 ## Features
 
-- Logs SSH connection attempts, including usernames and passwords.
-- Simulates an interactive shell environment.
-- Logs executed commands.
-- Provides customizable username and password for authentication.
+- **Log SSH connection attempts**: Captures IP addresses, usernames, and passwords used in authentication attempts.
+- **Interactive shell simulation**: Provides a realistic shell environment to interact with attackers.
+- **Command logging**: Logs all commands executed by the attacker.
+- **Customizable authentication**: Allows setting a custom username and password for authentication.
+- **Rotating log files**: Logs are stored in rotating files to prevent excessive disk usage.
 
 ### Basic Usage 
 
 By default, the honeypot will use the username `root`; no password is required.
 
-```sh
+```bash
 python3 server.py -a <IP address> -p <port>
 ```
 
@@ -33,9 +32,9 @@ sudo python3 server.py -a 0.0.0.0 -p 22
 Usage with Custom Authentication:
 
 ```sh
-python3 server.py -a 0.0.0.0 -p 2222 -u ubuntu -d passwd
+python3 server.py -a 0.0.0.0 -p 2222 -u ubuntu -d pass
 
-sudo python3 server.py -a 0.0.0.0 -p 22 -u ubuntu -d passwd 
+sudo python3 server.py -a 0.0.0.0 -p 22 -u ubuntu -d pass 
 ```
 
 ### Arguments
@@ -55,7 +54,7 @@ The honeypot logs activities in three files:
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE.md` file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contributions & Reporting Issues:
 
