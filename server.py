@@ -325,8 +325,8 @@ if __name__ == "__main__":
     parser = CustomParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         usage=argparse.SUPPRESS,
-        description="SSH Honeypot Server 2.25 (https://github.com/rihadroshan/CodeSentry)\nUsage: --address ADDRESS --port PORT",
-        epilog="\n Report bugs to: https://github.com/rihadroshan/CodeSentry",
+        description="SSH Honeypot Server 2.25 (https://github.com/rihadroshan/ssh-honeypot)\nUsage: --address ADDRESS --port PORT",
+        epilog="\n Report bugs to: https://github.com/rihadroshan/ssh-honeypot",
         add_help=False
     )
 
@@ -335,8 +335,8 @@ if __name__ == "__main__":
 
     optional_group = parser.add_argument_group('optional arguments')
     optional_group.add_argument('-a', '--address', type=str, help='IP address to bind (default: machine\'s IP address)')
-    optional_group.add_argument('-u', '--username', type=str, help='Expected username')
-    optional_group.add_argument('-d', '--password', type=str, help='Expected password')
+    optional_group.add_argument('-u', '--username', type=str, help='username')
+    optional_group.add_argument('-d', '--password', type=str, help='password')
     optional_group.add_argument('-v', '--version', action='version', version='SSH Honeypot Server 2.25', help='Display version information')
 
     help_group = parser.add_argument_group()
