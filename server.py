@@ -156,7 +156,6 @@ def emulated_shell(channel, client_ip, username="root"):
                 files = file_system.get(current_directory, {})
                 if target in files:
                     if isinstance(files[target], dict):
-                        # Change directory if it's a valid directory
                         current_directory = f"{current_directory}/{target}"
                         response = f"\n{current_directory}\r\n".encode()
                     else:
@@ -222,7 +221,6 @@ def client_handle(client, addr, username, password):
         client.close()
 
 def main(address, port, username, password):
-    # Generate host key if it doesn't exist
     if not os.path.exists('server.key'):
         key = paramiko.RSAKey.generate(2048)
         key.write_private_key_file('server.key')
@@ -241,15 +239,117 @@ def main(address, port, username, password):
         except Exception as error:
             print(f"Exception occurred in accepting client: {error}")
 
+class CustomParser(argparse.ArgumentParser):
+    def _check_for_unknown_args(self, args):
+
+        temp_parser = argparse.ArgumentParser(add_help=False)
+        temp_parser.add_argument('-a', '--address', type=str)
+        temp_parser.add_argument('-p', '--port', type=int)
+        temp_parser.add_argument('-u', '--username', type=str)
+        temp_parser.add_argument('-d', '--password', type=str)
+        temp_parser.add_argument('-v', '--version', action='store_true')
+        temp_parser.add_argument('-h', '--help', action='store_true')
+
+        known_args, unknown_args = temp_parser.parse_known_args(args)
+
+        if unknown_args:
+            for arg in unknown_args:
+                if arg.startswith('-'):
+                    option = arg.lstrip('-')
+                    print(f"{self.prog}: invalid option -- '{option}'")
+                    print(f"Try '{self.prog} -h' for help")
+                    sys.exit(2)
+                else:
+                    print(f"{self.prog}: unrecognized argument '{arg}'")
+                    print(f"Try '{self.prog} -h' for help")
+                    sys.exit(2)
+
+    def parse_known_args(self, args=None, namespace=None):
+        if args is None:
+            args = sys.argv[1:]
+
+        self._check_for_unknown_args(args)
+
+        try:
+            return super().parse_known_args(args, namespace)
+        except argparse.ArgumentError as e:
+            self.print_usage(sys.stderr)
+            print(f"{self.prog}: error: {e}", file=sys.stderr)
+            sys.exit(2)
+
+def get_default_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip_address = s.getsockname()[0]
+        s.close()
+        return ip_address
+    except Exception as e:
+        print(f"Failed to get default IP address: {e}")
+        return "0.0.0.0"
+import signal
+import sys
+
+def signal_handler(sig, frame):
+    print("\nShutting down the server...")
+    try:
+        socks.close()
+    except Exception as e:
+        print(f"Error closing socket: {e}")
+    sys.exit(0)
+
+def main(address, port, username, password):
+    global socks
+
+    if not os.path.exists('server.key'):
+        key = paramiko.RSAKey.generate(2048)
+        key.write_private_key_file('server.key')
+    print(f"\nStarting server with username: {username} password: {password}\n")
+    socks = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socks.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    socks.bind((address, port))
+    socks.listen(100)
+
+    print(f"SSH server is listening on {address}:{port}.")
+
+    signal.signal(signal.SIGINT, signal_handler)
+
+    while True:
+        try:
+            client, addr = socks.accept()
+            threading.Thread(target=client_handle, args=(client, addr, username, password)).start()
+        except Exception as error:
+            print(f"Exception occurred in accepting client: {error}")
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-a', '--address', type=str, required=True, help='IP address')
-    parser.add_argument('-p', '--port', type=int, required=True, help='PORT')
-    parser.add_argument('-u', '--username', type=str, help='Username')
-    parser.add_argument('-d', '--password', type=str, help='Password')
+    parser = CustomParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        usage=argparse.SUPPRESS,
+        description="SSH Honeypot Server 2.25 (https://github.com/rihadroshan/CodeSentry)\nUsage: --address ADDRESS --port PORT",
+        epilog="\n Report bugs to: https://github.com/rihadroshan/CodeSentry",
+        add_help=False
+    )
+
+    required_group = parser.add_argument_group('required arguments')
+    required_group.add_argument('-p', '--port', type=int, required=True, help='Port to listen on')
+
+    optional_group = parser.add_argument_group('optional arguments')
+    optional_group.add_argument('-a', '--address', type=str, help='IP address to bind (default: machine\'s IP address)')
+    optional_group.add_argument('-u', '--username', type=str, help='Expected username')
+    optional_group.add_argument('-d', '--password', type=str, help='Expected password')
+    optional_group.add_argument('-v', '--version', action='version', version='SSH Honeypot Server 2.25', help='Display version information')
+
+    help_group = parser.add_argument_group()
+    help_group.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, help='Show this help message')
+
     args = parser.parse_args()
 
-    try:
-        main(args.address, args.port, args.username, args.password)
-    except KeyboardInterrupt:
-        print("\nSSH server terminated.")
+    address = args.address if args.address else get_default_ip()
+
+    print(f"Starting server with address: {address}, port: {args.port}")
+    if args.username:
+        print(f"Expected username: {args.username}")
+    if args.password:
+        print(f"Expected password: {args.password}")
+
+    main(address, args.port, args.username, args.password)
