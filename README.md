@@ -36,7 +36,8 @@ python3 server.py -a <IP address> -p <port> -u <username> -d <password>
 ### Basic Usage
 ```bash
 python3 server.py -p 2222
-
+```
+```bash
 sudo python3 server.py -p 22
 ```
 
