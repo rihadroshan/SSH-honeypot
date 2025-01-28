@@ -1,3 +1,5 @@
+This SSH honeypot logs authentication attempts and command executions, providing insights into potential malicious activities.
+
 ## **Features**
 
 - **Log SSH connection attempts**: Captures IP addresses, usernames, and passwords used in authentication attempts.
