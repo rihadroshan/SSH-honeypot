@@ -1,11 +1,12 @@
-## Features
+## **Features**
 
 - **Log SSH connection attempts**: Captures IP addresses, usernames, and passwords used in authentication attempts.
 - **Interactive shell simulation**: Provides a realistic shell environment to interact with attackers.
 - **Command logging**: Logs all commands executed by the attacker.
 - **Customizable authentication**: Allows setting a custom username and password for authentication.
 - **Rotating log files**: Logs are stored in rotating files to prevent excessive disk usage.
-## Basic Usage
+
+## **Basic Usage**
 
 By default, the honeypot will use the username `root`, no password, and bind to the machine's default IP address.
 
