@@ -8,6 +8,21 @@ This SSH honeypot logs authentication attempts and command executions, providing
 - **Customizable authentication**: Allows setting a custom username and password for authentication.
 - **Rotating log files**: Logs are stored in rotating files to prevent excessive disk usage.
 
+## Installation & Dependencies
+
+1. Clone this repository:  
+   ```bash
+   git clone https://github.com/rihadroshan/ssh-honeypot.git
+  ```   
+  ``` bash
+   cd ssh-honeypot
+   ```
+
+```bash
+pip install -r requirements.txt
+```
+
+
 ## **Basic Usage**
 
 By default, the honeypot will use the username `root`, no password, and bind to the machine's default IP address.
