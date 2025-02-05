@@ -13,8 +13,6 @@ This SSH honeypot logs authentication attempts and command executions, providing
 1. Clone this repository:  
    ```bash
    git clone https://github.com/rihadroshan/ssh-honeypot.git
-   ```
-   ``` bash
    cd ssh-honeypot
    ```
    ```bash
