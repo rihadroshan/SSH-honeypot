@@ -13,14 +13,13 @@ This SSH honeypot logs authentication attempts and command executions, providing
 1. Clone this repository:  
    ```bash
    git clone https://github.com/rihadroshan/ssh-honeypot.git
-  ```   
-  ``` bash
+   ```
+   ``` bash
    cd ssh-honeypot
    ```
-
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 
 ## **Basic Usage**
