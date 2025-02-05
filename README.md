@@ -10,11 +10,12 @@ This SSH honeypot logs authentication attempts and command executions, providing
 
 ## Installation & Dependencies
 
-1. Clone this repository:  
+1. **Clone this repository**:  
    ```bash
    git clone https://github.com/rihadroshan/ssh-honeypot.git
    cd ssh-honeypot
    ```
+2. **Install Dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
