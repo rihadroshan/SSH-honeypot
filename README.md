@@ -1,4 +1,4 @@
-This **SSH honeypot** logs authentication attempts and command executions, providing insights into potential malicious activities.
+**SSH honeypot** logs authentication attempts and command executions, providing insights into potential malicious activities.
 
 ## **Features**
 
