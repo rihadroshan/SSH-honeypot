@@ -67,7 +67,6 @@ python3 server.py -a 192.168.1.100 -p 2222
 
 sudo python3 server.py -a 192.168.1.100 -p 22 -u ubuntu -d pass
 ```
----
 
 ## Logs
 
