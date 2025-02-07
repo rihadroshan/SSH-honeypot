@@ -19,8 +19,7 @@ This **SSH honeypot** logs authentication attempts and command executions, provi
    ```bash
    pip install -r requirements.txt
    ```
-
-
+   
 ## **Basic Usage**
 
 By default, the honeypot will use the username `root`, no password, and bind to the machine's default IP address.
