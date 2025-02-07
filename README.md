@@ -28,8 +28,6 @@ By default, the honeypot will use the username `root`, no password, and bind to 
 python3 server.py -p <port>
 ```
 
----
-
 ## Usage with Custom Authentication
 
 You can specify a custom username and password for authentication. The `-a` (or `--address`) argument is optional and defaults to the machine's IP address if not provided.
