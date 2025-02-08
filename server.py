@@ -5,6 +5,8 @@ import threading
 import socket
 import argparse
 import os
+import signal
+import sys
 from datetime import datetime
 
 logging.basicConfig(filename='ssh_sys.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -287,8 +289,6 @@ def get_default_ip():
     except Exception as e:
         print(f"Failed to get default IP address: {e}")
         return "0.0.0.0"
-import signal
-import sys
 
 def signal_handler(sig, frame):
     print("\nShutting down the server...")
