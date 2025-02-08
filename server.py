@@ -350,6 +350,6 @@ if __name__ == "__main__":
     if args.username:
         print(f"Username: {args.username}")
     if args.password:
-        print(f"Expected password: {args.password}")
+        print(f"Password: {args.password}")
 
     main(address, args.port, args.username, args.password)
