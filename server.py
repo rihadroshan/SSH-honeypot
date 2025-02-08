@@ -270,8 +270,6 @@ class CustomParser(argparse.ArgumentParser):
         if args is None:
             args = sys.argv[1:]
 
-        self._check_for_unknown_args(args)
-
         try:
             return super().parse_known_args(args, namespace)
         except argparse.ArgumentError as e:
