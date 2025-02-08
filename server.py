@@ -283,7 +283,7 @@ def get_default_ip():
         return "0.0.0.0"
 
 def signal_handler(sig, frame):
-    print("\nShutting down the server...")
+    print("\nShutting down the server..")
     try:
         global running
         running = False
