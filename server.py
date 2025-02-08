@@ -346,7 +346,7 @@ if __name__ == "__main__":
 
     address = args.address if args.address else get_default_ip()
 
-    print(f"Starting server with address: {address}, port: {args.port}")
+    print(f"Starting server with IP address: {address}, Port: {args.port}")
     if args.username:
         print(f"Expected username: {args.username}")
     if args.password:
