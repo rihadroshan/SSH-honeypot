@@ -335,7 +335,7 @@ if __name__ == "__main__":
 
     optional_group = parser.add_argument_group('optional arguments')
     optional_group.add_argument('-a', '--address', type=str, help='IP address to bind (default: machine\'s IP address)')
-    optional_group.add_argument('-u', '--username', type=str, help='username')
+    optional_group.add_argument('-u', '--username', type=str)
     optional_group.add_argument('-d', '--password', type=str)
     optional_group.add_argument('-v', '--version', action='version', version='SSH Honeypot Server 2.25', help='Display version information')
 
