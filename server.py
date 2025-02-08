@@ -338,7 +338,7 @@ if __name__ == "__main__":
     optional_group.add_argument('-v', '--version', action='version', version='SSH Honeypot Server 2.25', help='Display version information')
 
     help_group = parser.add_argument_group()
-    help_group.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, help='Show this help message')
+    help_group.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS, help='Get help for commands')
 
     args = parser.parse_args()
 
