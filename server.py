@@ -66,7 +66,6 @@ class SSHServer(paramiko.ServerInterface):
 
 
 def emulated_shell(channel, client_ip, username="root"):
-    # Define the file system
     file_system = {
         "/root": {
             "config.txt": "This is the root user's config file.",
@@ -241,30 +240,25 @@ def main(address, port, username, password):
         except Exception as error:
             print(f"Exception occurred in accepting client: {error}")
 
+
 class CustomParser(argparse.ArgumentParser):
-    def _check_for_unknown_args(self, args):
+    def error(self, message):
+        print("SSH Honeypot: Try '-h' or '--help' for more options.")
+        self.exit(2)
 
-        temp_parser = argparse.ArgumentParser(add_help=False)
-        temp_parser.add_argument('-a', '--address', type=str)
-        temp_parser.add_argument('-p', '--port', type=int)
-        temp_parser.add_argument('-u', '--username', type=str)
-        temp_parser.add_argument('-d', '--password', type=str)
-        temp_parser.add_argument('-v', '--version', action='store_true')
-        temp_parser.add_argument('-h', '--help', action='store_true')
-
-        known_args, unknown_args = temp_parser.parse_known_args(args)
-
-        if unknown_args:
-            for arg in unknown_args:
-                if arg.startswith('-'):
-                    option = arg.lstrip('-')
-                    print(f"{self.prog}: invalid option -- '{option}'")
-                    print(f"Try '{self.prog} -h' for help")
-                    sys.exit(2)
-                else:
-                    print(f"{self.prog}: unrecognized argument '{arg}'")
-                    print(f"Try '{self.prog} -h' for help")
-                    sys.exit(2)
+    def format_help(self):
+        return (
+            "SSH Honeypot Server 2.25 (https://github.com/rihadroshan/ssh-honeypot)\n\n"
+            "required arguments:\n"
+            "  -p, --port <port>          Port to listen on\n\n"
+            "optional arguments:\n"
+            "  -a, --address <IP>         IP address to bind (default: machine's IP address)\n"
+            "  -u, --username <username>  Username to accept (default: root)\n"
+            "  -d, --password <password>  Password to accept (default: no password)\n"
+            "  -v, --version              Display version information\n"
+            "  -h, --help                 Get help for commands\n\n"
+            "Report bugs to: https://github.com/rihadroshan/ssh-honeypot\n"
+        )
 
     def parse_known_args(self, args=None, namespace=None):
         if args is None:
@@ -289,15 +283,28 @@ def get_default_ip():
         return "0.0.0.0"
 
 def signal_handler(sig, frame):
-    print("\nShutting down the server...")
+    print("\nShutting down the server..")
     try:
-        socks.close()
+        global running
+        running = False
+        
+        if 'socks' in globals():
+            socks.close()
+            
+        print("Waiting for existing connections to close...")
+        for thread in threading.enumerate():
+            if thread != threading.current_thread():
+                thread.join(timeout=1.0)
+                
     except Exception as e:
-        print(f"Error closing socket: {e}")
-    sys.exit(0)
+        print(f"Error during shutdown: {e}")
+    finally:
+        print("Server shutdown complete")
+        os._exit(0)
 
 def main(address, port, username, password):
-    global socks
+    global socks, running
+    running = True
 
     if not os.path.exists('server.key'):
         key = paramiko.RSAKey.generate(2048)
@@ -312,29 +319,31 @@ def main(address, port, username, password):
 
     signal.signal(signal.SIGINT, signal_handler)
 
-    while True:
+    while running:
         try:
-            client, addr = socks.accept()
-            threading.Thread(target=client_handle, args=(client, addr, username, password)).start()
+            socks.settimeout(1.0)
+            try:
+                client, addr = socks.accept()
+                threading.Thread(target=client_handle, args=(client, addr, username, password)).start()
+            except socket.timeout:
+                continue
         except Exception as error:
-            print(f"Exception occurred in accepting client: {error}")
+            if running:
+                print(f"Exception occurred in accepting client: {error}")
 
 if __name__ == "__main__":
     parser = CustomParser(
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        usage=argparse.SUPPRESS,
-        description="SSH Honeypot Server 2.25 (https://github.com/rihadroshan/ssh-honeypot)\nUsage: --address ADDRESS --port PORT",
-        epilog="\n Report bugs to: https://github.com/rihadroshan/ssh-honeypot",
+        formatter_class=argparse.RawTextHelpFormatter,
         add_help=False
     )
 
     required_group = parser.add_argument_group('required arguments')
     required_group.add_argument('-p', '--port', type=int, required=True, help='Port to listen on')
 
-    optional_group = parser.add_argument_group('optional arguments')
-    optional_group.add_argument('-a', '--address', type=str, help='IP address to bind (default: machine\'s IP address)')
-    optional_group.add_argument('-u', '--username', type=str)
-    optional_group.add_argument('-d', '--password', type=str)
+    optional_group = parser.add_argument_group('optional arguments:')
+    optional_group.add_argument('-a', '--address', type=str, help="IP address to bind (default: machine's IP address)")
+    optional_group.add_argument('-u', '--username', type=str, help="Username to accept (default: root)")
+    optional_group.add_argument('-d', '--password', type=str, help="Password to accept (default: no password)")
     optional_group.add_argument('-v', '--version', action='version', version='SSH Honeypot Server 2.25', help='Display version information')
 
     help_group = parser.add_argument_group()
