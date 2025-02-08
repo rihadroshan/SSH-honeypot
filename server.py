@@ -348,7 +348,7 @@ if __name__ == "__main__":
 
     print(f"Starting server with IP address: {address}, Port: {args.port}")
     if args.username:
-        print(f"Expected username: {args.username}")
+        print(f"Username: {args.username}")
     if args.password:
         print(f"Expected password: {args.password}")
 
