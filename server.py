@@ -239,7 +239,6 @@ def main(address, port, username, password):
         except Exception as error:
             print(f"Exception occurred in accepting client: {error}")
 
-
 class CustomParser(argparse.ArgumentParser):
     def error(self, message):
         print("SSH Honeypot: Try '-h' or '--help' for more options.")
