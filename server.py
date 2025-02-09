@@ -185,7 +185,6 @@ def emulated_shell(channel, client_ip, username="root"):
             current_line = b""
             cursor_position = 0
 
-
 def client_handle(client, addr, username, password):
     client_ip = addr[0]
     try:
