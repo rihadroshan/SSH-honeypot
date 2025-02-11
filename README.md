@@ -8,7 +8,7 @@
 - **Customizable authentication**: Allows setting a custom username and password for authentication.
 - **Rotating log files**: Logs are stored in rotating files to prevent excessive disk usage.
 
-## Installation
+## **Installation**
 
 1. **Clone this repository**:  
    ```bash
